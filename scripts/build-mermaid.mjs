@@ -6,6 +6,7 @@ import process from 'node:process'
 const rootDir = process.cwd()
 const presentationsDir = path.resolve(rootDir, 'presentations')
 const mermaidConfigPath = path.resolve(rootDir, 'mermaid.config.json')
+const puppeteerConfigPath = path.resolve(rootDir, 'mermaid.puppeteer-config.json')
 const cliExecutable = process.platform === 'win32' ? 'npx.cmd' : 'npx'
 
 async function collectMermaidFiles(directory) {
@@ -90,6 +91,8 @@ for (const inputPath of targets) {
     'transparent',
     '-c',
     mermaidConfigPath,
+    '-p',
+    puppeteerConfigPath,
   ])
 
   console.log(`Rendered ${path.relative(rootDir, outputPath)}`)
