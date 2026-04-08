@@ -20,16 +20,19 @@ Use this skill for slide decks that need to be technically strong, visually cont
 
 1. Start from a Marp deck structure sized to the talk length.
 2. State the audience, outcome, and time budget in the deck plan before writing deep content.
-3. Build one clear idea per slide and push overflow into a handout.
+3. Build one clear idea per slide and push overflow into speaker notes or a repo brief instead of bloating the deck.
 4. Use rendered Mermaid SVGs when a diagram is needed.
 5. For news or source-backed decks, add a superscript appendix link to every factual bullet and create appendix slides that hold the supporting sources.
 6. Invoke the `News Source Validator` subagent to confirm that each bullet, appendix page, and linked material match in wording, date, and level of certainty.
 7. Apply the repository theme and keep slide typography and spacing consistent.
-8. Run `npm run build` or the focused build commands to produce HTML and PDF artifacts.
+8. Leave room for the build-generated lead-slide QR block or place `<!-- cover-links -->` where the QR cards should land.
+9. Run `npm run build` or the focused build commands to produce HTML and PDF artifacts.
+10. After push, rely on the publish workflow to validate the live HTML title and PDF URL.
 
-## Deck standard
+## Deck Standard
 
 - Open with a lead slide that establishes the promise of the talk.
+- The lead slide should leave a clean zone for the HTML and PDF QR cards.
 - Use section slides to reset attention during longer decks.
 - Keep code and tables rare and purposeful.
 - In source-backed decks, use visible appendix links instead of hiding all sourcing in notes.

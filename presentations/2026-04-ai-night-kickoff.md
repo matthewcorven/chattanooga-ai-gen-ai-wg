@@ -3,17 +3,19 @@ marp: true
 theme: ai-night
 paginate: true
 size: 16:9
-title: Chattanooga Generative AI Working Group Repository Kickoff
-description: Markdown-first meetup content workflow for decks, diagrams, and shared artifacts
-author: Chattanooga Generative AI Working Group
-footer: Chattanooga Generative AI Working Group
+title: AI Night Repository Kickoff
+description: Markdown-first meetup content workflow for decks, diagrams, and published artifacts
+author: AI Night
+footer: AI Night
 ---
 
 <!-- _class: lead -->
 
-# Chattanooga Generative AI Working Group Repository Kickoff
+# AI Night Repository Kickoff
 
-Marp decks, Mermaid diagrams, and shareable artifacts with one workflow
+Marp decks, Mermaid diagrams, and published artifacts with one workflow
+
+<!-- cover-links -->
 
 ---
 
@@ -32,7 +34,7 @@ Marp decks, Mermaid diagrams, and shareable artifacts with one workflow
 
 - Markdown is the source of truth
 - Mermaid diagrams render to SVG for slide clarity
-- Marp turns the deck into presentation and sharing formats
+- Marp turns the deck into live HTML and shareable PDF formats
 - The repo keeps authoring, export, and revision in one place
 
 ---
@@ -41,7 +43,7 @@ Marp decks, Mermaid diagrams, and shareable artifacts with one workflow
 
 | Capability | Purpose |
 | --- | --- |
-| Technical Markdown skill | Abstracts, handouts, companion notes |
+| Technical Markdown skill | Abstracts, briefs, companion notes |
 | Mermaid diagram skill | Architecture, sequence, and flow diagrams |
 | Marp production skill | Deck authoring and HTML/PDF export |
 | Build producer agent | Final artifact generation and verification |
@@ -53,12 +55,12 @@ Marp decks, Mermaid diagrams, and shareable artifacts with one workflow
 ```bash
 npm install
 npm run build:mermaid
-npm run build:html
-npm run build:pdf
+npm run build
 ```
 
 - HTML supports live presentation in a browser
 - PDF supports post-event sharing and distribution
+- GitHub Pages publishes the build and validates the live URLs after push
 
 ---
 
@@ -67,7 +69,7 @@ npm run build:pdf
 - One clear idea per slide
 - Diagrams when structure beats prose
 - Short titles and high-signal bullets
-- Talk-specific detail in a handout, not crammed into slides
+- Overflow goes into speaker notes or a repo brief, not into slide sprawl
 
 ---
 

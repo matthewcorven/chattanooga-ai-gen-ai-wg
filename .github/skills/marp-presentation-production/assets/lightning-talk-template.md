@@ -13,6 +13,8 @@ author: AI Night
 
 One sharp point in five minutes
 
+<!-- cover-links -->
+
 ---
 
 ## The Problem

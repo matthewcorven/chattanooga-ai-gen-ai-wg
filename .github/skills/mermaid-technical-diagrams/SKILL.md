@@ -1,6 +1,6 @@
 ---
 name: mermaid-technical-diagrams
-description: 'Professional Mermaid authoring for architecture diagrams, flowcharts, sequence diagrams, C4 views, ERDs, and slide-ready SVG visuals. Use when creating or refining Mermaid diagrams for Chattanooga Generative AI Working Group Markdown or Marp decks.'
+description: 'Professional Mermaid authoring for architecture diagrams, flowcharts, sequence diagrams, C4 views, ERDs, and slide-ready SVG visuals. Use when creating or refining Mermaid diagrams for AI Night Markdown or Marp decks.'
 argument-hint: 'Diagram goal, audience, diagram type, and systems involved'
 ---
 
@@ -10,7 +10,7 @@ Use this skill when the fastest path to clarity is a diagram instead of another 
 
 ## When to Use
 
-- Architecture overviews for a talk or handout
+- Architecture overviews for a talk or companion brief
 - Process and workflow visualizations
 - Sequence diagrams for request or tool flows
 - Lightweight C4 or system boundary diagrams

@@ -15,6 +15,8 @@ footer: AI Night Meetup
 
 The one-sentence thesis that ties the reporting together
 
+<!-- cover-links -->
+
 ---
 
 ## What Changed

@@ -12,7 +12,7 @@
 
 - Use one diagram per point.
 - Avoid more than two layers of nesting.
-- If labels exceed a short phrase, the diagram probably wants a companion handout.
+- If labels exceed a short phrase, the diagram probably wants to be split or supported by speaker notes or a brief.
 - Prefer stable nouns for nodes and active verbs for edges.
 
 ## Layout rules

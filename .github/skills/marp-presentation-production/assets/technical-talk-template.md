@@ -14,6 +14,8 @@ author: AI Night
 
 Outcome-focused subtitle
 
+<!-- cover-links -->
+
 ---
 
 ## Why This Matters

@@ -1,5 +1,5 @@
 ---
-description: "Use when authoring AI Night Marp decks, Mermaid diagrams, or Markdown handouts. Covers slide density, source-backed bullet linking, validation workflow, Marp frontmatter, diagram placement, and HTML/PDF export conventions."
+description: "Use when authoring AI Night Marp decks or nearby Mermaid diagrams. Covers slide density, source-backed bullet linking, QR-cover workflow, validation workflow, Marp frontmatter, diagram placement, and HTML/PDF export conventions."
 applyTo:
   - "presentations/**/*.md"
   - "presentations/**/*.mmd"
@@ -13,5 +13,5 @@ applyTo:
 - Before export, use the `News Source Validator` subagent to compare the bullet text, appendix links, and the linked source material; soften wording or adjust dates where the source is weaker than the claim.
 - Use Mermaid for architecture, process, sequence, and system relationship diagrams. Keep `.mmd` source next to the deck assets and render a sibling `.svg` for slide inclusion.
 - Prefer SVG diagrams and local assets that can be bundled into HTML and PDF output.
-- If a slide is becoming dense, move explanation into a companion Markdown handout instead of turning the slide into prose.
-- Final presentation output belongs in `dist/html` for browser delivery and `dist/pdf` for shareable leave-behinds.
+- Keep the opening slide compatible with the build-generated QR block that points to the published HTML and PDF URLs; add `<!-- cover-links -->` if you need to pin the QR placement explicitly.
+- Final presentation output belongs in `dist/html` for browser delivery and `dist/pdf` for sharing, with GitHub Pages publishing and post-push URL validation handled by workflow.

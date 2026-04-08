@@ -26,11 +26,13 @@
 - Use `<!-- _class: lead -->` for the opening slide.
 - Use `theme: ai-night` and `paginate: true` in frontmatter.
 - Prefer local assets that can travel with HTML and PDF export.
+- Leave the lead slide clear enough for the build-generated HTML and PDF QR cards, or add `<!-- cover-links -->` where they should appear.
 - Use SVG diagrams where possible for clarity at projector scale.
 
 ## Final review checklist
 
 - Does the title slide make the value of the talk obvious?
+- Is there enough uncluttered room for the lead-slide QR cards?
 - Can each slide be explained in under two minutes?
 - Are diagrams legible from the back of a room?
 - Is the closing slide actionable rather than generic?

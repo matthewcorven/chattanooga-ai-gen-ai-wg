@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Markdown-first authoring workspace for Chattanooga Generative AI Working Group decks, diagrams, and shareable artifacts.",
+  "description": "Markdown-first authoring workspace for AI Night decks, diagrams, and published HTML/PDF artifacts.",
   "engines": {
     "node": ">=20"
   },
@@ -14,11 +14,15 @@
     "build:pdf": "node ./scripts/build-marp.mjs pdf",
     "lint": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\"",
     "preview": "marp --server ./presentations",
+    "validate:published": "node ./scripts/validate-published-presentations.mjs",
     "verify": "npm run lint && npm run build"
   },
   "devDependencies": {
     "@marp-team/marp-cli": "^4.3.1",
     "@mermaid-js/mermaid-cli": "^11.12.0",
-    "markdownlint-cli2": "^0.22.0"
+    "gray-matter": "^4.0.3",
+    "markdownlint-cli2": "^0.22.0",
+    "playwright": "^1.52.0",
+    "qrcode": "^1.5.4"
   }
 }

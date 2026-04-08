@@ -1,8 +1,8 @@
-# Title
+# Session Brief
 
 ## Who This Is For
 
-State the audience, expected background, and why this document exists.
+State the audience, expected background, and why this brief exists.
 
 ## What Problem This Solves
 

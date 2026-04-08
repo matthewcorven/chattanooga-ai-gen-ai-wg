@@ -8,7 +8,7 @@
 - One short list of topics attendees will leave with.
 - One sentence on prerequisites or expected familiarity.
 
-### Technical handout
+### Session brief
 
 - Opening summary
 - Core concepts or architecture
@@ -32,7 +32,7 @@
 - Prefer short code blocks with one point each.
 - Use tables only when the reader needs to compare multiple options.
 
-## Chattanooga Generative AI Working Group expectations
+## AI Night expectations
 
 - Assume the audience is technically curious and reasonably experienced.
 - Explain the shape of the problem before vendor-specific detail.
@@ -43,5 +43,5 @@
 
 - Is the audience obvious from the first section?
 - Can a reader skim just headings and still understand the flow?
-- Is any slide-only content incorrectly trapped in the handout, or vice versa?
+- Is any slide-only content incorrectly trapped in the brief, or vice versa?
 - Are commands, paths, and links precise and current?
