@@ -1,0 +1,24 @@
+{
+  "name": "ai-night",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Markdown-first authoring workspace for Chattanooga Generative AI Working Group decks, diagrams, and shareable artifacts.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run build:mermaid && npm run build:html && npm run build:pdf",
+    "build:mermaid": "node ./scripts/build-mermaid.mjs",
+    "build:html": "node ./scripts/build-marp.mjs html",
+    "build:pdf": "node ./scripts/build-marp.mjs pdf",
+    "lint": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\"",
+    "preview": "marp --server ./presentations",
+    "verify": "npm run lint && npm run build"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.3.1",
+    "@mermaid-js/mermaid-cli": "^11.12.0",
+    "markdownlint-cli2": "^0.22.0"
+  }
+}

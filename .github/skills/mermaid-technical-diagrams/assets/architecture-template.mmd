@@ -1,0 +1,12 @@
+flowchart LR
+    Users[Audience or Users]
+    Repo[Markdown Repository]
+    Deck[Marp Deck]
+    Diagram[Mermaid Diagram]
+    Output[HTML or PDF Artifact]
+
+    Users --> Repo
+    Repo --> Deck
+    Repo --> Diagram
+    Deck --> Output
+    Diagram --> Deck

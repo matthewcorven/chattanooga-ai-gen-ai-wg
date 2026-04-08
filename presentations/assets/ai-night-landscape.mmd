@@ -1,0 +1,13 @@
+flowchart LR
+    A[Topic and audience] --> B[Markdown source]
+    B --> C[Marp deck]
+    B --> D[Mermaid diagrams]
+    D --> E[SVG assets]
+    C --> F[HTML presentation]
+    C --> G[PDF shareable]
+    E --> C
+
+    classDef accent fill:#e5f2ef,stroke:#0a7d67,color:#10213a,stroke-width:2px;
+    classDef warm fill:#fff3e9,stroke:#e96b35,color:#10213a,stroke-width:2px;
+    class A,B,C,D accent;
+    class E,F,G warm;

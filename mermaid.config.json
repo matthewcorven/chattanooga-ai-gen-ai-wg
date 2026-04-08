@@ -1,0 +1,35 @@
+{
+  "theme": "neutral",
+  "look": "classic",
+  "fontFamily": "Avenir Next, Segoe UI, sans-serif",
+  "themeVariables": {
+    "primaryColor": "#e5f2ef",
+    "primaryTextColor": "#10213a",
+    "primaryBorderColor": "#0a7d67",
+    "lineColor": "#204065",
+    "secondaryColor": "#f7efe4",
+    "secondaryTextColor": "#10213a",
+    "secondaryBorderColor": "#e96b35",
+    "tertiaryColor": "#f8f5ee",
+    "tertiaryTextColor": "#10213a",
+    "tertiaryBorderColor": "#8fa8c4",
+    "clusterBkg": "#f2f6fb",
+    "clusterBorder": "#8fa8c4",
+    "noteBkgColor": "#fff9ef",
+    "noteBorderColor": "#e96b35",
+    "actorBkg": "#e5f2ef",
+    "actorBorder": "#0a7d67",
+    "actorTextColor": "#10213a",
+    "signalColor": "#204065",
+    "labelBoxBkgColor": "#ffffff",
+    "labelBoxBorderColor": "#8fa8c4",
+    "labelTextColor": "#10213a"
+  },
+  "flowchart": {
+    "curve": "basis"
+  },
+  "sequence": {
+    "showSequenceNumbers": true,
+    "mirrorActors": false
+  }
+}
