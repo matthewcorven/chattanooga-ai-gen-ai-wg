@@ -14,7 +14,7 @@ Builders, product leaders, and technically curious attendees who want a cleaner 
 
 ### 1. Release Velocity Is Now Structural
 
-Anthropic's February Claude upgrade, early March discussion around DeepSeek V4, and the late-March to early-April burst from OpenAI, Microsoft, and Google all point to the same shift: frontier AI competition is now a continuous release race.
+Anthropic's February Opus 4.6 release, early March DeepSeek V4 reporting, and the late-March to early-April burst from OpenAI, Microsoft, and Google all point to the same shift: frontier AI competition is now a continuous release race.
 
 ### 2. Access Control Became Product Strategy
 
@@ -27,16 +27,16 @@ Energy, compute, and deployment capacity are no longer just background constrain
 ## Timeline Anchors
 
 - Feb. 3: Bloomberg reported that Jensen Huang said the AI buildout could eventually lower energy costs as more electrical capacity comes online and AI improves energy generation and distribution.
-- Feb. 5: Anthropic released a major Claude upgrade centered on agent teams, stronger coding, and longer-running work.
+- Feb. 5: Anthropic released Opus 4.6 with agent teams, a coding focus, and a longer context window for more sustained work.
 - Late February into March: reporting kept returning to the same theme that frontier AI progress was tied to hardware supply, energy, and infrastructure limits.
-- Early March: DeepSeek V4 became a major talking point as a large open-weight multimodal model with a very long context window.
-- Mid-March: roundup coverage increasingly described AI as a constant churn of launches and competitive reactions rather than isolated headline drops.
+- Early March: DeepSeek V4 reporting, and later speculation around a mystery model, renewed attention on Chinese multimodal model competition.
+- Mid-March: roundup coverage and the Feb. 5 OpenAI-Anthropic timing framed AI as an ongoing release race.
 - Late March: Anthropic confirmed it had been adjusting Claude usage during peak periods, and users noticed sessions were not going as far.
 - Mar. 30-Apr. 1: reports spread that Claude Code users were hitting limits much sooner than expected and did not feel well informed about the changes.
 - Mar. 31: OpenAI said it had closed a $122 billion funding round and said it was building a unified AI superapp; outside reporting on the ChatGPT-Codex-browser integration plan had surfaced earlier in March.
 - Apr. 2: Microsoft announced three in-house MAI models for Foundry, signaling a stronger push to build core AI capabilities beyond OpenAI dependence.
 - Apr. 2: Google released Gemma 4 with multimodal positioning, agentic workflow messaging, and broader developer access.
-- Apr. 3-4: Anthropic blocked Claude Pro and Max subscriptions from OpenClaw and similar third-party harnesses, pushing those uses toward separate metered billing.
+- Apr. 4: Anthropic stopped allowing Pro and Max subscription allotments to cover OpenClaw-style third-party harness use and shifted those flows to separate metered billing.
 - Apr. 6-7: Anthropic introduced Claude Mythos Preview, positioned more toward security-sensitive and high-stakes use than broad public availability.
 - Apr. 7-8: attention on Mythos centered on limited partner testing, reinforcing the idea that safety and control are shaping frontier rollout strategy as much as capability.
 

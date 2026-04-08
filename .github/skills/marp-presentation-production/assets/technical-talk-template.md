@@ -5,7 +5,7 @@ paginate: true
 size: 16:9
 title: Talk Title
 description: One-line description of the talk
-author: Chattanooga Generative AI Working Group
+author: AI Night
 ---
 
 <!-- _class: lead -->

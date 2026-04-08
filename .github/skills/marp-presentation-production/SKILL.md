@@ -40,5 +40,6 @@ Use this skill for slide decks that need to be technically strong, visually cont
 - [Presentation standards](./references/presentation-standards.md)
 - [News sourcing workflow](./references/news-source-validation.md)
 - [Export workflow](./references/export-workflow.md)
+- [News talk template](./assets/news-source-talk-template.md)
 - [Technical talk template](./assets/technical-talk-template.md)
 - [Lightning talk template](./assets/lightning-talk-template.md)

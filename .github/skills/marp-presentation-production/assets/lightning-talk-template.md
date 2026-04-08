@@ -4,7 +4,7 @@ theme: ai-night
 paginate: true
 size: 16:9
 title: Lightning Talk Title
-author: Chattanooga Generative AI Working Group
+author: AI Night
 ---
 
 <!-- _class: lead -->

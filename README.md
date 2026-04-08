@@ -1,13 +1,14 @@
-# Chattanooga Generative AI Working Group Content Studio
+# AI Night Content Studio
 
-This workspace is set up for Markdown-first authoring of Chattanooga Generative AI Working Group material: Marp slide decks, Mermaid diagrams, technical handouts, and exported HTML/PDF artifacts.
+This workspace is set up for Markdown-first authoring of AI Night material: Marp slide decks, Mermaid diagrams, technical handouts, and exported HTML/PDF artifacts.
 
 ## Included workflow
 
 - Workspace-local Copilot skills for technical Markdown, Mermaid diagramming, and Marp presentation production
 - Specialist Copilot agents for slide editing, diagram editing, and release-style build/export work
-- A repo theme for consistent Chattanooga Generative AI Working Group branding across decks
+- A repo theme for consistent AI Night branding across decks
 - Build scripts that render Mermaid `.mmd` files into sibling `.svg` assets and publish Marp decks into `dist/html` and `dist/pdf`
+- A source-backed news workflow that requires superscript appendix links and a validation pass for factual bullets
 
 ## Repository layout
 
@@ -43,6 +44,7 @@ Agents available in the agent picker:
 
 - `Marp Deck Editor`
 - `Mermaid Diagram Editor`
+- `News Source Validator`
 - `Presentation Build Producer`
 
 ## Working model
@@ -50,8 +52,9 @@ Agents available in the agent picker:
 1. Draft the deck or handout in Markdown.
 2. Keep Mermaid source diagrams as `.mmd` files beside the deck assets.
 3. Run `npm run build:mermaid` to render slide-ready SVG assets.
-4. Run `npm run build:html` for live presentation output.
-5. Run `npm run build:pdf` for a shareable artifact.
+4. For source-backed decks, add visible appendix links and validate them with the `News Source Validator` subagent.
+5. Run `npm run build:html` for live presentation output.
+6. Run `npm run build:pdf` for a shareable artifact.
 
 ## Prerequisites
 
