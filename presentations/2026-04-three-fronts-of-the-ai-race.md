@@ -309,3 +309,12 @@ Use the superscript source links on factual bullets to jump to the supporting ap
 - [Bloomberg: Nvidia CEO Says AI Build-Out Will Eventually Lower Energy Costs](https://www.bloomberg.com/news/articles/2026-02-03/nvidia-ceo-says-ai-build-out-will-eventually-lower-energy-costs)
 - [CNBC: Who is really footing the AI energy bill?](https://www.cnbc.com/2026/03/13/ai-data-centers-electricity-prices-backlash-ratepayer-protection.html)
 - [OpenAI: OpenAI raises $122 billion to accelerate the next phase of AI](https://openai.com/index/accelerating-the-next-phase-ai/)
+
+---
+
+## Internal Editorial Confidence
+
+- Exact source matches: A04, A08, A09, A10, A11, A12.
+- Defensible but synthesis-backed: A01, A02, A03, A05, A06, A07, A13, A14, A15.
+- Highest caution: A05 and A13 still depend partly on partial Reuters access in this validation environment.
+- If this deck is republished beyond the meetup, re-check Reuters originals and consider one more softening pass on the synthesis bullets.
