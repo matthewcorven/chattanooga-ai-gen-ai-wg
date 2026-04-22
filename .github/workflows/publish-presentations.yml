@@ -40,6 +40,12 @@ jobs:
       - name: Build presentations
         run: npm run build
 
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate built presentation layouts
+        run: npm run validate:local
+
       - name: Enable static asset publishing
         run: touch dist/.nojekyll
 

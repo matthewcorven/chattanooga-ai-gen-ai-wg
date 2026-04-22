@@ -27,10 +27,18 @@ npm install
 npm run build:mermaid
 npm run build:html
 npm run build:pdf
+npm run validate:local
 npm run build
 npm run preview
 npm run validate:published
 npm run verify
+```
+
+Focused build examples:
+
+```bash
+npm run build:html -- --deck 2026-04-the-end-of-flat-fee-ai
+npm run build:pdf -- --deck presentations/2026-04-the-end-of-flat-fee-ai.md
 ```
 
 ## Copilot Customizations
@@ -56,7 +64,8 @@ Agents available in the agent picker:
 4. Run `npm run build:mermaid` to render slide-ready SVG assets.
 5. For source-backed decks, add visible appendix links and validate them with the `News Source Validator` subagent.
 6. Run `npm run build` to generate HTML, PDF, copied HTML assets, and `dist/presentation-manifest.json`.
-7. Push `main` to publish the artifacts to GitHub Pages and validate the live URLs.
+7. Run `npm run validate:local` to catch lead-slide QR layout regressions in the built HTML before push.
+8. Push `main` to publish the artifacts to GitHub Pages and validate the live URLs.
 
 ## Published URL Model
 
@@ -68,4 +77,4 @@ Agents available in the agent picker:
 
 - Node.js 20 or newer
 - Chrome, Edge, or Firefox installed locally for Marp PDF generation
-- `npx playwright install chromium` if you want to run `npm run validate:published` locally
+- `npx playwright install chromium` if you want to run `npm run validate:local` or `npm run validate:published` locally

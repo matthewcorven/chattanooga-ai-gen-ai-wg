@@ -6,6 +6,14 @@
 npm install
 npm run build:mermaid
 npm run build
+npm run validate:local
+```
+
+Focused deck examples:
+
+```bash
+npm run build:html -- --deck 2026-04-the-end-of-flat-fee-ai
+npm run build:pdf -- --deck presentations/2026-04-the-end-of-flat-fee-ai.md
 ```
 
 ## Output locations
@@ -22,11 +30,14 @@ npm run build
 - HTML builds copy presentation-local static assets into `dist/html/` so published decks keep their diagrams and screenshots.
 - Build Mermaid diagrams before HTML or PDF export so the deck has concrete assets to embed.
 - The build injects lead-slide QR codes that point to the published HTML and PDF URLs derived from `origin` or `PRESENTATION_SITE_URL`.
+- `npm run build:html -- --deck <deck>` and `npm run build:pdf -- --deck <deck>` limit output to one deck for faster iteration.
+- `npm run validate:local` checks built HTML decks for the expected QR card labels and verifies the QR block does not overlap the lead-slide subtitle.
 - Pushing `main` publishes `dist/` to GitHub Pages and then validates the live HTML title and PDF URL with Playwright.
 
 ## Validation
 
 - Run `npm run verify` before sharing a deck.
+- Run `npm run validate:local` before push when QR placement, cover layout, or other build-time HTML details changed.
 - Inspect the HTML output for layout or overflow issues that do not show up in raw Markdown.
 - Inspect the PDF output for cropped code blocks, oversized tables, or diagrams with unreadable labels.
 - If you need to validate another published environment, set `PRESENTATION_SITE_URL` before running `npm run validate:published`.

@@ -185,6 +185,62 @@ export async function buildPresentationManifest(
   return manifest.sort((left, right) => left.relativeSourcePath.localeCompare(right.relativeSourcePath))
 }
 
+function normalizeDeckSelector(value) {
+  return normalizePathForUrl(value).replace(/^\.\//u, '').replace(/^presentations\//u, '')
+}
+
+export function filterPresentationManifest(manifest, deckSelector) {
+  if (typeof deckSelector !== 'string' || deckSelector.trim().length === 0) {
+    return manifest
+  }
+
+  const selector = normalizeDeckSelector(deckSelector.trim())
+
+  const exactMatches = manifest.filter((entry) => {
+    const relativeSourcePath = normalizePathForUrl(entry.relativeSourcePath)
+    const sourcePath = 'sourcePath' in entry ? normalizePathForUrl(entry.sourcePath) : ''
+
+    return (
+      selector === relativeSourcePath ||
+      selector === `presentations/${relativeSourcePath}` ||
+      (sourcePath.length > 0 && selector === sourcePath)
+    )
+  })
+
+  if (exactMatches.length === 1) {
+    return exactMatches
+  }
+
+  if (exactMatches.length > 1) {
+    throw new Error(
+      `Deck selector "${deckSelector}" matched multiple presentations: ${exactMatches
+        .map((entry) => entry.relativeSourcePath)
+        .join(', ')}`
+    )
+  }
+
+  const basenameMatches = manifest.filter((entry) => {
+    const basename = path.basename(entry.relativeSourcePath)
+    const basenameWithoutExtension = path.basename(entry.relativeSourcePath, '.md')
+
+    return selector === basename || selector === basenameWithoutExtension
+  })
+
+  if (basenameMatches.length === 1) {
+    return basenameMatches
+  }
+
+  if (basenameMatches.length > 1) {
+    throw new Error(
+      `Deck selector "${deckSelector}" is ambiguous. Matches: ${basenameMatches
+        .map((entry) => entry.relativeSourcePath)
+        .join(', ')}`
+    )
+  }
+
+  throw new Error(`Deck selector "${deckSelector}" did not match any presentation.`)
+}
+
 export async function writePresentationManifest(rootDir, manifest) {
   const manifestPath = path.resolve(rootDir, 'dist', 'presentation-manifest.json')
 

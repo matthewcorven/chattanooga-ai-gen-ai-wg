@@ -26,8 +26,9 @@ Use this skill for slide decks that need to be technically strong, visually cont
 6. Invoke the `News Source Validator` subagent to confirm that each bullet, appendix page, and linked material match in wording, date, and level of certainty.
 7. Apply the repository theme and keep slide typography and spacing consistent.
 8. Leave room for the build-generated lead-slide QR block or place `<!-- cover-links -->` where the QR cards should land.
-9. Run `npm run build` or the focused build commands to produce HTML and PDF artifacts.
-10. After push, rely on the publish workflow to validate the live HTML title and PDF URL.
+9. Use `npm run build:html -- --deck <deck>` or `npm run build:pdf -- --deck <deck>` when iterating on one deck instead of rebuilding the whole set.
+10. Run `npm run build` and then `npm run validate:local` to catch lead-slide QR regressions before push.
+11. After push, rely on the publish workflow to validate the live HTML title and PDF URL.
 
 ## Deck Standard
 

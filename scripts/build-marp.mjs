@@ -5,19 +5,51 @@ import process from 'node:process'
 import QRCode from 'qrcode'
 import {
   buildPresentationManifest,
+  filterPresentationManifest,
   resolveSiteBaseUrl,
   writePresentationManifest,
 } from './presentation-utils.mjs'
 
 const rootDir = process.cwd()
 const presentationsDir = path.resolve(rootDir, 'presentations')
-const format = process.argv[2]
+const args = process.argv.slice(2)
+const format = args[0]
 const cliExecutable = process.platform === 'win32' ? 'npx.cmd' : 'npx'
 
+function parseCliOptions(rawArgs) {
+  const options = {
+    deck: null,
+  }
+
+  for (let index = 1; index < rawArgs.length; index += 1) {
+    const argument = rawArgs[index]
+
+    if (argument === '--deck') {
+      const value = rawArgs[index + 1]
+
+      if (!value || value.startsWith('--')) {
+        console.error('--deck requires a presentation path or basename.')
+        process.exit(1)
+      }
+
+      options.deck = value
+      index += 1
+      continue
+    }
+
+    console.error(`Unknown option: ${argument}`)
+    process.exit(1)
+  }
+
+  return options
+}
+
 if (format !== 'html' && format !== 'pdf') {
-  console.error('Usage: node ./scripts/build-marp.mjs <html|pdf>')
+  console.error('Usage: node ./scripts/build-marp.mjs <html|pdf> [--deck <presentation>]')
   process.exit(1)
 }
+
+const options = parseCliOptions(args)
 
 function runCommand(command, args) {
   return new Promise((resolve, reject) => {
@@ -148,7 +180,10 @@ await rm(outputRoot, { recursive: true, force: true })
 await mkdir(outputRoot, { recursive: true })
 
 const siteBaseUrl = await resolveSiteBaseUrl(rootDir)
-const presentationManifest = await buildPresentationManifest(rootDir, siteBaseUrl)
+const presentationManifest = filterPresentationManifest(
+  await buildPresentationManifest(rootDir, siteBaseUrl),
+  options.deck
+)
 
 await writePresentationManifest(rootDir, presentationManifest)
 
@@ -162,6 +197,12 @@ if (presentationManifest.length === 0) {
 }
 
 console.log(`Using ${siteBaseUrl} for generated QR destinations.`)
+
+if (options.deck) {
+  console.log(
+    `Building ${presentationManifest.length} presentation for selector "${options.deck}": ${presentationManifest[0].relativeSourcePath}`
+  )
+}
 
 for (const entry of presentationManifest) {
   const outputPath = path.resolve(rootDir, 'dist', format === 'html' ? entry.html.path : entry.pdf.path)
