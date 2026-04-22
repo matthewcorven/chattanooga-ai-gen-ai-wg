@@ -14,6 +14,7 @@
     "build:pdf": "node ./scripts/build-marp.mjs pdf",
     "lint": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\"",
     "preview": "marp --server ./presentations",
+    "scout:forwardfuture": "node ./scripts/collect-forwardfuture-news.mjs",
     "validate:published": "node ./scripts/validate-published-presentations.mjs",
     "verify": "npm run lint && npm run build"
   },
