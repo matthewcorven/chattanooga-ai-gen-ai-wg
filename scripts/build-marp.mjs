@@ -52,13 +52,19 @@ function toDataUri(svgMarkup) {
 }
 
 function renderCoverLink(url, imageSource, title, subtitle) {
-  return [
+  const markup = [
     `<a class="cover-link" href="${escapeHtml(url)}" rel="noopener noreferrer">`,
     `  <img src="${imageSource}" alt="QR code for ${escapeHtml(title)} at ${escapeHtml(url)}">`,
     `  <span class="cover-link-title">${escapeHtml(title)}</span>`,
-    `  <span class="cover-link-subtitle">${escapeHtml(subtitle)}</span>`,
-    '</a>',
-  ].join('\n')
+  ]
+
+  if (typeof subtitle === 'string' && subtitle.trim().length > 0) {
+    markup.push(`  <span class="cover-link-subtitle">${escapeHtml(subtitle)}</span>`)
+  }
+
+  markup.push('</a>')
+
+  return markup.join('\n')
 }
 
 async function buildCoverLinksMarkup(entry) {
@@ -80,8 +86,8 @@ async function buildCoverLinksMarkup(entry) {
 
   return [
     '<div class="cover-links">',
-    renderCoverLink(entry.html.url, toDataUri(htmlQr), 'Live HTML', 'Open the browser deck'),
-    renderCoverLink(entry.pdf.url, toDataUri(pdfQr), 'Share PDF', 'Download the PDF export'),
+    renderCoverLink(entry.html.url, toDataUri(htmlQr), 'Live HTML'),
+    renderCoverLink(entry.pdf.url, toDataUri(pdfQr), 'Share PDF'),
     '</div>',
   ].join('\n')
 }

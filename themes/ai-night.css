@@ -202,6 +202,22 @@ a {
   color: var(--ai-night-accent);
 }
 
+section sup {
+  display: inline-block;
+  font-size: 0.5em;
+  line-height: 0;
+  vertical-align: super;
+  white-space: nowrap;
+}
+
+section sup + sup {
+  margin-left: 0.22em;
+}
+
+section sup a {
+  text-decoration: none;
+}
+
 footer,
 section::after {
   color: var(--ai-night-ink-soft);
