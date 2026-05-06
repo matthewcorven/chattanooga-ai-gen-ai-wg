@@ -28,7 +28,7 @@ Plan tiers, usage meters, and runtime costs in May 2026
 
 ## The New Cost Stack
 
-![w:1080](./assets/the-ai-tool-bill-has-layers.svg)
+![w:960](./assets/the-ai-tool-bill-has-layers.svg)
 
 ---
 

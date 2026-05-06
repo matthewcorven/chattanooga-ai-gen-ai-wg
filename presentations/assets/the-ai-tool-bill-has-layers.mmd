@@ -1,14 +1,11 @@
-flowchart TB
-    W["Developer AI workflow"]
-    P["1. Plan access<br/>seat tier<br/>included models<br/>priority access"]
-    U["2. Usage meter<br/>premium requests<br/>credits<br/>token overage"]
-    E["3. Execution meter<br/>Actions minutes<br/>agent runtime<br/>cloud commitment"]
-    I["Infrastructure pressure underneath<br/>GPU and TPU capacity<br/>latency, power, and procurement"]
+flowchart LR
+    W["Developer AI workflow"] --> P["1. Plan access<br/>seat tier, models<br/>priority access"] --> U["2. Usage meter<br/>requests, credits<br/>token overage"] --> E["3. Execution meter<br/>Actions, runtime<br/>cloud commit"]
 
-    W --> P --> U --> E
-    I -. shapes .-> P
-    I -. shapes .-> U
-    I -. shapes .-> E
+    I["Infrastructure pressure<br/>GPU/TPU capacity<br/>latency, power, procurement"]
+
+    I -.-> P
+    I -.-> U
+    I -.-> E
 
     classDef root fill:#10213a,stroke:#10213a,color:#f8f5ee,stroke-width:2px;
     classDef green fill:#e5f2ef,stroke:#0a7d67,color:#10213a,stroke-width:2px;
