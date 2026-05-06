@@ -1,0 +1,23 @@
+flowchart TB
+    W["Developer AI workflow"]
+    P["1. Plan access<br/>seat tier<br/>included models<br/>priority access"]
+    U["2. Usage meter<br/>premium requests<br/>credits<br/>token overage"]
+    E["3. Execution meter<br/>Actions minutes<br/>agent runtime<br/>cloud commitment"]
+    I["Infrastructure pressure underneath<br/>GPU and TPU capacity<br/>latency, power, and procurement"]
+
+    W --> P --> U --> E
+    I -. shapes .-> P
+    I -. shapes .-> U
+    I -. shapes .-> E
+
+    classDef root fill:#10213a,stroke:#10213a,color:#f8f5ee,stroke-width:2px;
+    classDef green fill:#e5f2ef,stroke:#0a7d67,color:#10213a,stroke-width:2px;
+    classDef warm fill:#fff3e9,stroke:#e96b35,color:#10213a,stroke-width:2px;
+    classDef blue fill:#edf4fb,stroke:#204065,color:#10213a,stroke-width:2px;
+    classDef soft fill:#f5efe2,stroke:#8fa8c4,color:#10213a,stroke-width:2px,stroke-dasharray: 6 4;
+
+    class W root;
+    class P green;
+    class U warm;
+    class E blue;
+    class I soft;
