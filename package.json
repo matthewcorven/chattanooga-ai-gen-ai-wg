@@ -13,6 +13,7 @@
     "build:html": "node ./scripts/build-marp.mjs html",
     "build:pdf": "node ./scripts/build-marp.mjs pdf",
     "lint": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\"",
+    "publish:wait": "node ./scripts/wait-for-publish.mjs",
     "preview": "marp --server ./presentations",
     "scout:forwardfuture": "node ./scripts/collect-forwardfuture-news.mjs",
     "validate:local": "node ./scripts/validate-local-presentations.mjs",

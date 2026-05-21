@@ -28,7 +28,7 @@ Use this skill for slide decks that need to be technically strong, visually cont
 8. Leave room for the build-generated lead-slide QR block or place `<!-- cover-links -->` where the QR cards should land.
 9. Use `npm run build:html -- --deck <deck>` or `npm run build:pdf -- --deck <deck>` when iterating on one deck instead of rebuilding the whole set.
 10. Run `npm run build` and then `npm run validate:local` to catch lead-slide QR regressions before push.
-11. After push, rely on the publish workflow to validate the live HTML title and PDF URL.
+11. After push, run `npm run publish:wait -- --commit HEAD` so one command waits for the GitHub Pages workflow to finish and reports whether build, deploy, and published URL validation all passed.
 
 ## Deck Standard
 

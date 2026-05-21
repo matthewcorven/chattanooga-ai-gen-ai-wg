@@ -30,6 +30,7 @@ npm run build:pdf
 npm run validate:local
 npm run build
 npm run preview
+npm run publish:wait -- --commit HEAD
 npm run validate:published
 npm run verify
 ```
@@ -65,7 +66,7 @@ Agents available in the agent picker:
 5. For source-backed decks, add visible appendix links and validate them with the `News Source Validator` subagent.
 6. Run `npm run build` to generate HTML, PDF, copied HTML assets, and `dist/presentation-manifest.json`.
 7. Run `npm run validate:local` to catch lead-slide QR layout regressions in the built HTML before push.
-8. Push `main` to publish the artifacts to GitHub Pages and validate the live URLs.
+8. Push `main`, then run `npm run publish:wait -- --commit HEAD` to wait for GitHub Pages publish and live URL validation in one command.
 
 ## Published URL Model
 
@@ -77,4 +78,5 @@ Agents available in the agent picker:
 
 - Node.js 20 or newer
 - Chrome, Edge, or Firefox installed locally for Marp PDF generation
+- GitHub CLI authenticated against the repository if you want `npm run publish:wait` to monitor the publish workflow
 - `npx playwright install chromium` if you want to run `npm run validate:local` or `npm run validate:published` locally
