@@ -33,6 +33,7 @@ Pricing, security, and enterprise control in May 2026
 ---
 
 ## Cost Continues to Rise
+
 ### Last Time it was GitHub Copilot, now it's Gemini 3.5 Flash
 
 - Google made Gemini 3.5 Flash its GA agentic and coding model with a 1M token context window, 65K max output, and preserved thoughts across turns. <sup><a href="#appendix-a01">A01</a></sup><sup><a href="#appendix-a02">A02</a></sup>
