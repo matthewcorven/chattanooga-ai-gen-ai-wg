@@ -27,10 +27,10 @@ Why this June window matters more than another model leaderboard
 
 ---
 
-## Apple Makes The Assistant The OS
+## Apple Rebuilt Siri; Techstory Reports Gemini In The Stack
 
 - Siri AI now combines personal context, onscreen awareness, broad web answers, and systemwide app actions across Apple devices. <sup><a href="#appendix-a01">A01</a></sup>
-- Apple is explicitly splitting execution between on-device foundation models and Private Cloud Compute, making privacy architecture part of the product. <sup><a href="#appendix-a01">A01</a></sup>
+- A Techstory article published after WWDC26 claims Apple partnered with Google and uses Google Gemini as part of the Siri AI stack, while Apple's own launch materials describe the system as Apple Foundation Models plus Private Cloud Compute. <sup><a href="#appendix-a01">A01</a></sup>
 - The rollout limits matter too: Siri AI is gated by newer hardware, delayed on iOS and iPadOS in the EU, and unavailable initially in China. <sup><a href="#appendix-a01">A01</a></sup>
 
 ---
@@ -85,9 +85,10 @@ Use the superscript links on factual bullets to jump to the supporting appendix 
 
 ## Appendix A01
 
-- Claim cluster: Apple is turning Siri into an OS-native AI layer with personal context, onscreen awareness, system actions, Private Cloud Compute, and region-specific rollout limits.
+- Claim cluster: Apple confirms Siri AI as an OS-native assistant with personal context, onscreen awareness, Private Cloud Compute, and rollout limits; Techstory separately reports that Apple partnered with Google and is using Gemini as part of the Siri AI stack.
 - [Apple: WWDC26: Apple unveils next generation of Apple Intelligence, Siri AI, powerful parental controls, and an expansive set of software improvements](https://www.apple.com/newsroom/2026/06/apple-unveils-next-generation-of-apple-intelligence-siri-ai-and-more/)
 - [Apple: Apple introduces Siri AI, a profoundly more capable and personal assistant](https://www.apple.com/newsroom/2026/06/apple-introduces-siri-ai-a-profoundly-more-capable-and-personal-assistant/)
+- [Techstory: Apple Unveils Siri AI at WWDC 2026 The Ground-Up Rebuild Powered by Google Gemini](https://techstory.in/siri-ai-wwdc-2026-apple-intelligence/)
 
 ---
 
