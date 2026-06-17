@@ -39,7 +39,7 @@ Why this June window matters more than another model leaderboard
 
 - Anthropic says Claude now authors more than 80% of the code it merges to production. <sup><a href="#appendix-a02">A02</a></sup>
 - Anthropic also says its typical engineer was merging about 8x as much code per day in Q2 2026 as in 2024, though it notes lines of code are an imperfect productivity measure. <sup><a href="#appendix-a02">A02</a></sup>
-- The core argument is that the real governance problem is no longer a single model demo, but AI systems increasingly helping build their successors. <sup><a href="#appendix-a02">A02</a></sup>
+- The core argument is that the real governance problem is no longer a single model demo, but AI systems increasingly helping build their successors, which is why Anthropic says the world should have a credible, coordinated option to slow or temporarily pause frontier AI development. <sup><a href="#appendix-a02">A02</a></sup>
 
 ---
 
