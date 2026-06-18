@@ -4,6 +4,21 @@ on:
   push:
     branches:
       - main
+    paths:
+      - .github/workflows/publish-presentations.yml
+      - package.json
+      - package-lock.json
+      - marp.config.mjs
+      - mermaid.config.json
+      - mermaid.puppeteer-config.json
+      - presentations/**
+      - scripts/build-marp.mjs
+      - scripts/build-mermaid.mjs
+      - scripts/presentation-utils.mjs
+      - scripts/validate-local-presentations.mjs
+      - scripts/validate-published-presentations.mjs
+      - scripts/notify-zulip.mjs
+      - themes/**
   workflow_dispatch:
 
 permissions:
@@ -78,18 +93,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Playwright browser
-        run: npx playwright install --with-deps chromium
 
       - name: Validate published presentation URLs
         env:
           PRESENTATION_SITE_URL: ${{ needs.deploy.outputs.page_url }}
-        run: npm run validate:published
+        run: node ./scripts/validate-published-presentations.mjs
 
   notify:
     runs-on: ubuntu-latest

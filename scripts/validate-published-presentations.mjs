@@ -1,10 +1,13 @@
 import process from 'node:process'
-import { chromium, request } from 'playwright'
-import { buildPresentationManifest, resolveSiteBaseUrl } from './presentation-utils.mjs'
+import { resolveSiteBaseUrl } from './presentation-utils.mjs'
 
 const rootDir = process.cwd()
 const maxAttempts = 8
 const retryDelayMs = 5000
+
+function trimTrailingSlash(value) {
+  return value.replace(/\/+$/u, '')
+}
 
 function wait(delayMs) {
   return new Promise((resolve) => {
@@ -33,47 +36,93 @@ async function withRetry(label, action) {
   throw lastError
 }
 
-async function validateHtmlTitle(browser, entry) {
-  await withRetry(`HTML validation for ${entry.title}`, async () => {
-    const page = await browser.newPage()
+function decodeHtmlEntities(value) {
+  return value
+    .replaceAll('&amp;', '&')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#39;', "'")
+}
 
-    try {
-      const response = await page.goto(entry.html.url, {
-        waitUntil: 'domcontentloaded',
-        timeout: 15000,
-      })
+function extractHtmlTitle(html) {
+  const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/iu)
 
-      if (!response || !response.ok()) {
-        const status = response ? response.status() : 'no-response'
-        throw new Error(`received ${status} from ${entry.html.url}`)
-      }
+  if (!titleMatch) {
+    throw new Error('missing <title> element')
+  }
 
-      await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {})
+  return decodeHtmlEntities(titleMatch[1]).replace(/\s+/gu, ' ').trim()
+}
 
-      const actualTitle = await page.title()
+async function loadPublishedManifest(siteBaseUrl) {
+  const manifestUrl = `${trimTrailingSlash(siteBaseUrl)}/presentation-manifest.json`
 
-      if (actualTitle !== entry.title) {
-        throw new Error(`expected title "${entry.title}" but got "${actualTitle}"`)
-      }
+  return await withRetry('Published manifest', async () => {
+    const response = await fetch(manifestUrl, {
+      headers: {
+        Accept: 'application/json',
+      },
+    })
 
-      console.log(`Validated HTML title for ${entry.title}: ${entry.html.url}`)
-    } finally {
-      await page.close()
+    if (!response.ok) {
+      throw new Error(`received ${response.status()} from ${manifestUrl}`)
     }
+
+    const payload = await response.json()
+
+    if (!Array.isArray(payload)) {
+      throw new Error(`expected an array manifest at ${manifestUrl}`)
+    }
+
+    return payload.map((entry) => ({
+      title: entry.title,
+      html: {
+        url: entry.htmlUrl,
+      },
+      pdf: {
+        url: entry.pdfUrl,
+      },
+    }))
   })
 }
 
-async function validatePdfUrl(requestContext, entry) {
-  await withRetry(`PDF validation for ${entry.title}`, async () => {
-    const response = await requestContext.get(entry.pdf.url, {
-      timeout: 15000,
+async function validateHtmlTitle(entry) {
+  await withRetry(`HTML validation for ${entry.title}`, async () => {
+    const response = await fetch(entry.html.url, {
+      headers: {
+        Accept: 'text/html',
+      },
     })
 
-    if (!response.ok()) {
+    if (!response.ok) {
+      throw new Error(`received ${response.status()} from ${entry.html.url}`)
+    }
+
+    const html = await response.text()
+    const actualTitle = extractHtmlTitle(html)
+
+    if (actualTitle !== entry.title) {
+      throw new Error(`expected title "${entry.title}" but got "${actualTitle}"`)
+    }
+
+    console.log(`Validated HTML title for ${entry.title}: ${entry.html.url}`)
+  })
+}
+
+async function validatePdfUrl(entry) {
+  await withRetry(`PDF validation for ${entry.title}`, async () => {
+    const response = await fetch(entry.pdf.url, {
+      headers: {
+        Accept: 'application/pdf',
+      },
+    })
+
+    if (!response.ok) {
       throw new Error(`received ${response.status()} from ${entry.pdf.url}`)
     }
 
-    const contentType = response.headers()['content-type'] ?? ''
+    const contentType = response.headers.get('content-type') ?? ''
 
     if (!contentType.toLowerCase().includes('application/pdf')) {
       throw new Error(`expected a PDF response but got content-type "${contentType}"`)
@@ -84,7 +133,7 @@ async function validatePdfUrl(requestContext, entry) {
 }
 
 const siteBaseUrl = await resolveSiteBaseUrl(rootDir)
-const manifest = await buildPresentationManifest(rootDir, siteBaseUrl)
+const manifest = await loadPublishedManifest(siteBaseUrl)
 
 if (manifest.length === 0) {
   console.log('No Marp decks found to validate.')
@@ -93,17 +142,7 @@ if (manifest.length === 0) {
 
 console.log(`Validating published presentation URLs under ${siteBaseUrl}`)
 
-const browser = await chromium.launch({ headless: true })
-const browserContext = await browser.newContext()
-const requestContext = await request.newContext()
-
-try {
-  for (const entry of manifest) {
-    await validateHtmlTitle(browserContext, entry)
-    await validatePdfUrl(requestContext, entry)
-  }
-} finally {
-  await requestContext.dispose()
-  await browserContext.close()
-  await browser.close()
+for (const entry of manifest) {
+  await validateHtmlTitle(entry)
+  await validatePdfUrl(entry)
 }
