@@ -16,6 +16,7 @@
     "publish:wait": "node ./scripts/wait-for-publish.mjs",
     "preview": "marp --server ./presentations",
     "scout:forwardfuture": "node ./scripts/collect-forwardfuture-news.mjs",
+    "test": "node --test",
     "validate:local": "node ./scripts/validate-local-presentations.mjs",
     "validate:published": "node ./scripts/validate-published-presentations.mjs",
     "verify": "npm run lint && npm run build"
