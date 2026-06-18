@@ -1,12 +1,61 @@
 import process from 'node:process'
-import { resolveSiteBaseUrl } from './presentation-utils.mjs'
+import { execFile } from 'node:child_process'
+import { basename } from 'node:path'
+import { promisify } from 'node:util'
 
 const rootDir = process.cwd()
 const maxAttempts = 8
 const retryDelayMs = 5000
+const execFileAsync = promisify(execFile)
 
 function trimTrailingSlash(value) {
   return value.replace(/\/+$/u, '')
+}
+
+function deriveSiteBaseUrlFromRemote(remoteUrl) {
+  const trimmed = remoteUrl.trim()
+  const sshMatch = trimmed.match(/^git@github\.com:([^/]+)\/([^/]+?)(?:\.git)?$/u)
+
+  if (sshMatch) {
+    const [, owner, repo] = sshMatch
+    return repo.toLowerCase() === `${owner.toLowerCase()}.github.io`
+      ? `https://${owner}.github.io`
+      : `https://${owner}.github.io/${repo}`
+  }
+
+  const httpsMatch = trimmed.match(/^https:\/\/github\.com\/([^/]+)\/([^/]+?)(?:\.git)?$/u)
+
+  if (httpsMatch) {
+    const [, owner, repo] = httpsMatch
+    return repo.toLowerCase() === `${owner.toLowerCase()}.github.io`
+      ? `https://${owner}.github.io`
+      : `https://${owner}.github.io/${repo}`
+  }
+
+  return null
+}
+
+async function resolveSiteBaseUrl() {
+  const explicitSiteBaseUrl = process.env.PRESENTATION_SITE_URL
+
+  if (typeof explicitSiteBaseUrl === 'string' && explicitSiteBaseUrl.trim().length > 0) {
+    return trimTrailingSlash(explicitSiteBaseUrl.trim())
+  }
+
+  try {
+    const { stdout } = await execFileAsync('git', ['-C', rootDir, 'remote', 'get-url', 'origin'])
+    const derivedSiteBaseUrl = deriveSiteBaseUrlFromRemote(stdout.trim())
+
+    if (derivedSiteBaseUrl) {
+      return trimTrailingSlash(derivedSiteBaseUrl)
+    }
+  } catch {
+    // Fall through to the final explicit failure below.
+  }
+
+  throw new Error(
+    `Unable to resolve a published site URL. Set PRESENTATION_SITE_URL or configure a GitHub origin remote for ${basename(rootDir)}.`
+  )
 }
 
 function wait(delayMs) {
@@ -132,7 +181,7 @@ async function validatePdfUrl(entry) {
   })
 }
 
-const siteBaseUrl = await resolveSiteBaseUrl(rootDir)
+const siteBaseUrl = await resolveSiteBaseUrl()
 const manifest = await loadPublishedManifest(siteBaseUrl)
 
 if (manifest.length === 0) {
