@@ -79,6 +79,92 @@ function escapeHtml(value) {
     .replaceAll('>', '&gt;')
 }
 
+function formatIndexTitle(format) {
+  return format === 'html' ? 'HTML Deck Index' : 'PDF Deck Index'
+}
+
+function getRelativeOutputPath(entry, format) {
+  const artifactPath = format === 'html' ? entry.html.path : entry.pdf.path
+  return artifactPath.replace(new RegExp(`^${format}/`, 'u'), '')
+}
+
+function buildFormatIndexMarkup(format, siteBaseUrl, manifest) {
+  const pageTitle = formatIndexTitle(format)
+  const siblingFormat = format === 'html' ? 'pdf' : 'html'
+  const siblingTitle = siblingFormat === 'html' ? 'HTML' : 'PDF'
+  const normalizedSiteBaseUrl = siteBaseUrl.replace(/\/+$/u, '')
+  const entriesMarkup = manifest
+    .map((entry) => {
+      const primaryPath = getRelativeOutputPath(entry, format)
+      const siblingPath = getRelativeOutputPath(entry, siblingFormat)
+      const primaryLabel = format === 'html' ? 'Open deck' : 'Open PDF'
+
+      return [
+        '<li>',
+        `  <a href="${escapeHtml(primaryPath)}">${escapeHtml(entry.title)}</a>`,
+        `  <span>${escapeHtml(primaryLabel)} • <a href="../${escapeHtml(siblingFormat)}/${escapeHtml(siblingPath)}">${escapeHtml(siblingTitle)}</a></span>`,
+        '</li>',
+      ].join('\n')
+    })
+    .join('\n')
+
+  return [
+    '<!doctype html>',
+    '<html lang="en">',
+    '<head>',
+    '  <meta charset="utf-8">',
+    '  <meta name="viewport" content="width=device-width, initial-scale=1">',
+    `  <title>${escapeHtml(pageTitle)}</title>`,
+    '  <style>',
+    '    :root { color-scheme: light; }',
+    '    body {',
+    "      font-family: 'Avenir Next', 'Segoe UI', sans-serif;",
+    '      margin: 0;',
+    '      min-height: 100vh;',
+    '      color: #10213a;',
+    '      background:',
+    '        radial-gradient(circle at top left, rgba(233, 107, 53, 0.08), transparent 28%),',
+    '        radial-gradient(circle at right 10% bottom 15%, rgba(10, 125, 103, 0.08), transparent 24%),',
+    '        linear-gradient(135deg, #fbfaf6 0%, #f8f5ee 100%);',
+    '    }',
+    '    main { max-width: 980px; margin: 0 auto; padding: 56px 28px 72px; }',
+    '    h1 { margin: 0 0 12px; font-size: clamp(2rem, 4vw, 3rem); }',
+    '    p { margin: 0 0 24px; color: #52647d; font-size: 1.05rem; }',
+    '    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }',
+    '    li { background: rgba(255, 255, 255, 0.88); border: 1px solid #d5dfeb; border-radius: 18px; padding: 18px 20px; box-shadow: 0 14px 28px rgba(16, 33, 58, 0.08); }',
+    '    li a { color: #10213a; font-weight: 700; text-decoration: none; }',
+    '    li a:hover { text-decoration: underline; }',
+    '    li span { display: block; margin-top: 6px; color: #52647d; font-size: 0.96rem; }',
+    '    .meta { margin-bottom: 28px; display: flex; flex-wrap: wrap; gap: 14px; }',
+    '    .meta a { color: #0a7d67; font-weight: 700; text-decoration: none; }',
+    '    .meta a:hover { text-decoration: underline; }',
+    '  </style>',
+    '</head>',
+    '<body>',
+    '  <main>',
+    `    <h1>${escapeHtml(pageTitle)}</h1>`,
+    '    <p>Browse the published Chattanooga Generative AI Working Group decks.</p>',
+    '    <div class="meta">',
+    `      <a href="${escapeHtml(normalizedSiteBaseUrl)}">GitHub Pages home</a>`,
+    `      <a href="../${escapeHtml(siblingFormat)}/">${escapeHtml(siblingTitle)} index</a>`,
+    '    </div>',
+    '    <ul>',
+    entriesMarkup,
+    '    </ul>',
+    '  </main>',
+    '</body>',
+    '</html>',
+    '',
+  ].join('\n')
+}
+
+async function writeFormatIndexPage(outputRoot, format, siteBaseUrl, manifest) {
+  const indexPath = path.join(outputRoot, 'index.html')
+  const markup = buildFormatIndexMarkup(format, siteBaseUrl, manifest)
+
+  await writeFile(indexPath, markup, 'utf8')
+}
+
 function toDataUri(svgMarkup) {
   return `data:image/svg+xml;base64,${Buffer.from(svgMarkup).toString('base64')}`
 }
@@ -231,3 +317,5 @@ for (const entry of presentationManifest) {
     await rm(tempInputPath, { force: true })
   }
 }
+
+await writeFormatIndexPage(outputRoot, format, siteBaseUrl, presentationManifest)
